@@ -1,0 +1,161 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2 class="mb-4">⏳ Your Capsules</h2>
+
+<!-- 📊 Stats -->
+<div class="row mb-4">
+    <div class="col-md-4">
+        <div class="card stats-card p-3 text-center shadow">
+            <h4>{{ capsules|length }}</h4>
+            <p>Total Capsules</p>
+        </div>
+    </div>
+</div>
+
+<!-- 📦 Capsules -->
+<div class="row">
+{% for c in capsules %}
+<div class="col-md-4 fade-in">
+
+    <div class="card capsule-card shadow-lg border-0">
+
+        {% if c.image %}
+        <img src="{{ c.image.url }}" class="card-img-top">
+        {% endif %}
+
+        <div class="card-body">
+
+            <h5 class="mb-2">{{ c.title }}</h5>
+
+            {% if c.is_locked %}
+                <p class="text-warning">🔒 Locked</p>
+                <p id="countdown-{{ c.id }}" class="countdown"></p>
+            {% else %}
+                <p class="text-success">🔓 {{ c.message }}</p>
+            {% endif %}
+
+            <!-- 🔥 BUTTONS -->
+            <div class="d-flex gap-2 mt-3">
+
+                <a href="/delete/{{ c.id }}/" 
+                   class="btn btn-sm btn-danger flex-fill text-center"
+                   onclick="return confirm('Delete this capsule?')">
+                   🗑
+                </a>
+
+                <a href="/edit/{{ c.id }}/" 
+                   class="btn btn-sm btn-warning flex-fill text-center">
+                   ✏
+                </a>
+
+                <a href="/share/{{ c.share_token }}/" 
+                   class="btn btn-sm btn-dark flex-fill text-center">
+                   🔗
+                </a>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+{% endfor %}
+</div>
+
+<!-- 🎨 STYLES -->
+<style>
+body {
+    background: linear-gradient(135deg, #134e4a, #99f6e4);
+}
+
+/* Cards */
+.capsule-card {
+    border-radius: 15px;
+    transition: 0.3s;
+    overflow: hidden;
+}
+
+.capsule-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+}
+
+/* Stats */
+.stats-card {
+    border-radius: 15px;
+}
+
+/* Image */
+.card-img-top {
+    height: 180px;
+    object-fit: cover;
+}
+
+/* Buttons */
+.btn {
+    border-radius: 10px;
+    transition: 0.3s;
+    font-size: 14px;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+}
+
+/* Countdown */
+.countdown {
+    font-size: 14px;
+    color: #78350f;
+}
+
+/* Animation */
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+</style>
+
+<!-- ⏳ FIXED COUNTDOWN SCRIPT -->
+<script>
+{% for c in capsules %}
+var unlockDate{{ c.id }} = new Date("{{ c.unlock_date|date:'Y-m-d H:i:s' }}").getTime();
+var interval{{ c.id }} = setInterval(function() {
+
+    var now = new Date().getTime();
+    var distance = unlockDate{{ c.id }} - now;
+
+    if (distance > 0) {
+
+        var days = Math.floor(distance / (1000*60*60*24));
+        var hours = Math.floor((distance % (1000*60*60*24)) / (1000*60*60));
+        var minutes = Math.floor((distance % (1000*60*60)) / (1000*60));
+
+        document.getElementById("countdown-{{ c.id }}").innerHTML =
+            `⏳ ${days}d ${hours}h ${minutes}m`;
+
+    } else {
+
+        // ✅ STOP TIMER
+        clearInterval(interval{{ c.id }});
+
+        // ✅ UPDATE UI INSTANTLY (NO RELOAD)
+        document.getElementById("countdown-{{ c.id }}").innerHTML =
+            "🔓 Unlocked! Refresh to view";
+
+    }
+
+}, 1000);
+{% endfor %}
+</script>
+
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="col-md-6 mx-auto fade-in">
+
+    <div class="card p-4">
+        <h3 class="mb-3">Create Capsule 📦</h3>
+
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <label>Title</label>
+            <input class="form-control mb-3" name="title" placeholder="Enter title">
+
+            <label>Message</label>
+            <textarea class="form-control mb-3" name="message" placeholder="Write your memory..."></textarea>
+
+            <label>Unlock Date</label>
+            <input type="datetime-local" class="form-control mb-3" name="unlock_date">
+
+            <label>Upload Image (optional)</label>
+            <input type="file" class="form-control mb-3" name="image">
+
+            <button class="btn btn-primary w-100">Create Capsule</button>
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

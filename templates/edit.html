@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="col-md-6 mx-auto fade-in">
+
+    <div class="card p-4 shadow">
+        <h3 class="text-warning">Edit Capsule</h3>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <input class="form-control mb-3" name="title" value="{{ capsule.title }}">
+
+            <textarea class="form-control mb-3" name="message">{{ capsule.message }}</textarea>
+
+            <button class="btn btn-primary w-100">Update</button>
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}
