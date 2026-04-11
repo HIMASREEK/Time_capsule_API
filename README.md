@@ -24,6 +24,17 @@ A secure Django-based web application where users can create **time-locked messa
 
 ---
 ## Screenshots
+<img width="1915" height="624" alt="image" src="https://github.com/user-attachments/assets/b61fc25b-1694-4515-8786-f631320c7c32" />
+<img width="1908" height="665" alt="image" src="https://github.com/user-attachments/assets/46326e1a-ba12-410e-8d93-4a5cedb6b096" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/3fe535e8-041d-4658-ae57-c4c8cbe22b04" />
+<img width="1904" height="547" alt="image" src="https://github.com/user-attachments/assets/731cafb4-fd3a-4304-bdf2-4886d8c0db22" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/7a1cf34d-59d4-4d7e-aa1e-0a28272f3730" />
+<img width="1896" height="875" alt="image" src="https://github.com/user-attachments/assets/eed63e7b-bb8b-48ca-9574-9c96c34ba471" />
+
+
+https://github.com/user-attachments/assets/2e137167-83eb-456b-9774-bcd717cd23e5
+
+
 
 ---
 
